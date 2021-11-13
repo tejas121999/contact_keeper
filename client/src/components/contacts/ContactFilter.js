@@ -17,7 +17,7 @@ const ContactFilter = () => {
     if (text.current.value !== '') {
       filterContacts(e.target.value);
     } else {
-      clearFilter(); 
+      clearFilter();
     }
   };
 

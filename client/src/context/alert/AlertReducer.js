@@ -1,4 +1,4 @@
-import { SET_ALERT, REMOVE_ALERT } from "../type";
+import { SET_ALERT, REMOVE_ALERT } from '../type';
 
 export default (state, action) => {
     switch (action.type) {
@@ -9,4 +9,4 @@ export default (state, action) => {
         default:
             return state;
     }
-}
+};

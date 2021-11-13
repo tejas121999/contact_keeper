@@ -1,12 +1,11 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react';
 import ContactContext from '../../context/contact/ContactContext';
 
 const ContactForm = () => {
-    // access to any state or methods
-    const contactContext = useContext(ContactContext)
+    const contactContext = useContext(ContactContext);
 
-    const { addContact, clearCurrent, updateContact, current } = contactContext
-    // edit user
+    const { addContact, updateContact, clearCurrent, current } = contactContext;
+
     useEffect(() => {
         if (current !== null) {
             setContact(current);
@@ -18,14 +17,14 @@ const ContactForm = () => {
                 type: 'personal'
             });
         }
-    }, [contactContext, current])
-    // add contact
+    }, [contactContext, current]);
+
     const [contact, setContact] = useState({
         name: '',
         email: '',
         phone: '',
         type: 'personal'
-    })
+    });
 
     const { name, email, phone, type } = contact;
 
@@ -36,77 +35,75 @@ const ContactForm = () => {
         e.preventDefault();
         if (current === null) {
             addContact(contact);
-        }else{
-            updateContact(contact)
+        } else {
+            updateContact(contact);
         }
-        // setContact({
-        //     name: '',
-        //     email: '',
-        //     phone: '',
-        //     type: 'personal'
-        // })
-        cleareAll();
-    }
+        clearAll();
+    };
 
-    const cleareAll = () => {
+    const clearAll = () => {
         clearCurrent();
-    }
+    };
 
     return (
         <form onSubmit={onSubmit}>
-            <h2 className='text-primary'>{current ? 'Edit Contact' : 'Add Contact'}</h2>
+            <h2 className='text-primary'>
+                {current ? 'Edit Contact' : 'Add Contact'}
+            </h2>
             <input
-                type="text"
-                placeholder="name"
-                name="name"
+                type='text'
+                placeholder='Name'
+                name='name'
                 value={name}
                 onChange={onChange}
             />
             <input
-                type="email"
-                placeholder="Email"
-                name="email"
+                type='email'
+                placeholder='Email'
+                name='email'
                 value={email}
                 onChange={onChange}
             />
             <input
-                type="text"
-                placeholder="Phone"
-                name="phone"
+                type='text'
+                placeholder='Phone'
+                name='phone'
                 value={phone}
                 onChange={onChange}
             />
             <h5>Contact Type</h5>
             <input
-                type="radio"
-                name="type"
-                value="personal"
+                type='radio'
+                name='type'
+                value='personal'
                 checked={type === 'personal'}
                 onChange={onChange}
-            /> personal {''}
+            />{' '}
+            Personal{' '}
             <input
-                type="radio"
-                name="type"
-                value="professional"
+                type='radio'
+                name='type'
+                value='professional'
                 checked={type === 'professional'}
                 onChange={onChange}
-            /> Professional
+            />{' '}
+            Professional
             <div>
                 <input
-                    type="submit"
-                    value={current ? 'Edit Contact' : 'Add Contact'}
-                    className="btn btn-primary btn-block"
+                    type='submit'
+                    value={current ? 'Update Contact' : 'Add Contact'}
+                    className='btn btn-primary btn-block'
                 />
             </div>
             {current && (
                 <div>
-                    <button className='btn btn-light btn-block' onClick={cleareAll}>
-                        Cleare
+                    <button className='btn btn-light btn-block' onClick={clearAll}>
+                        Clear
                     </button>
                 </div>
             )}
         </form>
-    )
-}
+    );
+};
 
-export default ContactForm
+export default ContactForm;
